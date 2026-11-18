@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Gaegu:wght@700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#f1e6d6; --paper:#f8f0e3; --blush:#f3d6d3; --rose:#c9566f; --wine:#6e2233;
+  --lav:#94709f; --sage:#7f9474; --ink:#4e2a2f; --gold:#b99155;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--cream);-webkit-text-size-adjust:100%}
+body{font-family:"Cormorant Garamond",Georgia,serif;color:var(--ink);background:var(--cream) var(--grain);overflow-x:hidden}
+body.locked{overflow:hidden;height:100vh;height:100svh}
+img,svg,canvas,video{display:block}
+
+/* ========== INTRO ========== */
+#intro{position:fixed;inset:0;z-index:50;background:var(--cream) var(--grain);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+#intro.clear{background:transparent}
+#bloom{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;will-change:transform}
+#envBtn{position:relative;z-index:2;background:none;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;color:var(--rose);-webkit-tap-highlight-color:transparent;transition:opacity .9s ease,transform 2.4s cubic-bezier(.3,.7,.3,1)}
+#envBtn:focus-visible{outline:2px solid var(--rose);outline-offset:12px;border-radius:8px}
+.env{position:relative;width:min(62vw,340px);aspect-ratio:320/230;perspective:1000px;animation:float 3.6s ease-in-out infinite;filter:drop-shadow(0 12px 14px rgba(90,55,35,.22))}
+.env svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.flap{z-index:3;transform-origin:50% 0;transition:transform .85s cubic-bezier(.45,.05,.3,1);transition-delay:.25s}
+.front{z-index:2}.back{z-index:1}
+.tap{font-family:"Pinyon Script",cursive;font-size:clamp(1.7rem,6vw,2.2rem);margin-top:3rem;animation:pulse 2.2s ease-in-out infinite;transition:opacity .3s}
+#seal{transform-box:fill-box;transform-origin:center;transition:transform .35s ease,opacity .35s ease}
+.opening .env{animation:none}
+.opening .tap{opacity:0;animation:none}
+.opening #seal{transform:scale(1.25);opacity:0}
+.opening .flap{transform:rotateX(178deg)}
+.flap-back .flap{z-index:0}
+.leaving #envBtn{opacity:0;transform:scale(1.5)}
+@keyframes float{50%{transform:translateY(-9px) rotate(-.6deg)}}
+@keyframes pulse{50%{opacity:.45}}
+
+/* ========== UMUM ========== */
+section{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:clamp(3.5rem,8vw,6rem) 0}
+.ribbon{position:absolute;left:0;right:0;height:42px;background:linear-gradient(#a93d58,#8c2b45);box-shadow:0 2px 5px rgba(80,25,35,.25);z-index:4}
+.ribbon::before,.ribbon::after{content:"";position:absolute;left:-10px;right:-10px;border-top:3px dashed #fbe9e0}
+.ribbon::before{top:8px}.ribbon::after{bottom:8px}
+.ribbon.top{top:0}.ribbon.bottom{bottom:0}
+.fl{position:absolute;pointer-events:none;filter:drop-shadow(0 6px 7px rgba(95,45,45,.2))}
+.deco{position:absolute;filter:drop-shadow(0 7px 7px rgba(70,35,30,.25))}
+.rv{opacity:0;transform:translateY(38px) rotate(var(--r,0deg)) scale(.9);transition:opacity 1s ease var(--d,0s),transform 1.2s cubic-bezier(.2,.9,.25,1.1) var(--d,0s)}
+.rv.in{opacity:1;transform:rotate(var(--r,0deg))}
+.script{font-family:"Pinyon Script",cursive;font-weight:400;color:var(--wine)}
+
+/* ========== HERO ========== */
+#hero{flex-direction:column;text-align:center}
+.title{position:relative;z-index:2;line-height:.86;font-size:clamp(5rem,23vw,12.5rem);text-shadow:2px 2px 0 rgba(201,86,111,.28)}
+.title span{display:block}
+.title .a{transform:translateX(-11%)}
+.title .b{transform:translateX(9%);margin-top:.12em}
+.sub{position:relative;z-index:2;font-size:clamp(1.15rem,3.6vw,1.65rem);margin:2rem auto 0;padding:0 2rem;max-width:40rem;color:var(--ink)}
+.name{position:relative;z-index:2;font-size:clamp(2.2rem,8vw,3.8rem);color:var(--rose);margin-top:.7rem}
+.cue{position:absolute;z-index:3;bottom:96px;left:50%;margin-left:-40px;width:80px;text-align:center;font-style:italic;font-size:1.05rem;color:var(--wine);animation:bob 1.8s ease-in-out infinite}
+.cue::after{content:"";display:block;width:11px;height:11px;margin:.3rem auto 0;border-right:2px solid;border-bottom:2px solid;transform:rotate(45deg)}
+@keyframes bob{50%{transform:translateY(8px)}}
+
+/* ========== SCENE FOTO ========== */
+.scene{position:relative;width:min(94vw,86vh,800px);width:min(94vw,86svh,800px);aspect-ratio:1/1;z-index:2}
+.scene>*{position:absolute}
+.ph{background:linear-gradient(135deg,#f7d5d3,#f6e6d4 60%,#e7cfdc);display:flex;align-items:center;justify-content:center;font:italic 500 1.15rem "Cormorant Garamond",serif;color:#9e6474;overflow:hidden;position:relative}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#photos2{background:var(--blush) var(--grain);background-blend-mode:multiply}
+#photos2::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.11) 0 2px,transparent 2px 5px),repeating-linear-gradient(-45deg,rgba(150,60,80,.07) 0 2px,transparent 2px 5px)}
+
+.oval{left:27%;top:12%;width:47%;aspect-ratio:37/47}
+.oval .ph{position:absolute;inset:8.5%;border-radius:50%}
+.oval svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 9px 10px rgba(80,25,35,.35))}
+.snap{left:3%;bottom:7%;width:33%;aspect-ratio:1;padding:3.5%;background:#fffaf1;box-shadow:0 10px 18px rgba(80,45,35,.28)}
+.snap .ph{width:100%;height:100%}
+.snap::before{content:"";position:absolute;z-index:2;left:30%;top:-5%;width:40%;height:12%;background:rgba(230,178,180,.78);transform:rotate(-3deg)}
+.polaroid{z-index:1;left:3%;top:13%;width:50%;padding:3.3% 3.3% 13%;background:#fffaf1;box-shadow:0 14px 22px rgba(80,35,40,.32)}
+.polaroid .ph{width:100%;aspect-ratio:1/1.05}
+.polaroid p{position:absolute;bottom:2.2%;left:0;right:0;text-align:center;font:400 clamp(1.3rem,5vw,2.2rem) "Pinyon Script",cursive;color:var(--wine)}
+.note{z-index:2;left:55%;top:5%;width:41%;aspect-ratio:4/5;background:#fbf4e6 var(--grain);box-shadow:0 8px 14px rgba(80,35,40,.2);padding:6% 5%;color:var(--wine);overflow:hidden}
+.note h3{font:400 clamp(1.8rem,7vw,3.2rem)/1 "Pinyon Script",cursive}
+.note p{font-size:clamp(.72rem,2.3vw,1.02rem);margin-top:.5em;line-height:1.35}
+.locket{z-index:3;right:3%;top:37%;width:45%;aspect-ratio:1;overflow:visible}
+
+/* ========== CAMERA ROLL ========== */
+#roll{flex-direction:column;padding:4rem 0 6rem}
+#roll h2{position:relative;z-index:2;font-size:clamp(3rem,12vw,5.6rem);line-height:1;text-align:center;margin-bottom:1.4rem}
+.roll-sub{position:relative;z-index:2;font-style:italic;font-size:clamp(1rem,3.2vw,1.25rem);margin:.4rem 0 1.4rem;text-align:center}
+.film{position:relative;z-index:2;width:100%;padding:30px 0;background:#2b1a1e;box-shadow:0 14px 26px rgba(70,25,35,.35)}
+.film::before,.film::after{content:"";position:absolute;left:0;right:0;height:13px;background:repeating-linear-gradient(90deg,transparent 0 9px,#f6e8da 9px 23px,transparent 23px 32px);border-radius:3px;opacity:.85;z-index:2;pointer-events:none}
+.film::before{top:9px}.film::after{bottom:9px}
+.track{--fh:min(54vh,118vw);--fh:min(54svh,118vw);display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:0 calc(50vw - 30px);scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.track::-webkit-scrollbar{display:none}
+.shot{position:relative;flex:none;height:var(--fh);aspect-ratio:3/4;scroll-snap-align:center;overflow:hidden;border-radius:4px;background:linear-gradient(135deg,#f7d5d3,#f6e6d4 60%,#e7cfdc);-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;transform:scale(.9);opacity:.6;transition:transform .45s ease,opacity .45s ease}
+.shot.center{transform:none;opacity:1}
+.shot img,.shot video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.shot .ph-num{position:absolute;inset:0;display:grid;place-items:center;color:#9e6474;font-style:italic;font-size:1.1rem}
+.shot video{opacity:0;transition:opacity .35s ease}
+.shot.live-on video{opacity:1}
+.shot.live-on img{transform:scale(1.03);transition:transform 1.5s ease}
+.live{position:absolute;z-index:2;left:10px;top:10px;display:flex;align-items:center;gap:5px;padding:3px 8px 3px 5px;border-radius:12px;background:rgba(251,245,233,.86);color:#4e2a2f;font:600 .72rem/1 system-ui,-apple-system,sans-serif;letter-spacing:.06em;pointer-events:none}
+.live i{width:14px;height:14px;border-radius:50%;border:1.5px dotted currentColor;display:grid;place-items:center}
+.live i::after{content:"";width:6px;height:6px;border-radius:50%;border:1.5px solid currentColor}
+.live-on .live i{animation:spin 2.4s linear infinite}
+.roll-ui{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:1.2rem;margin-top:1.1rem;color:var(--wine)}
+.roll-ui button{width:42px;height:42px;border-radius:50%;border:1.5px dashed rgba(169,61,88,.6);background:#fbf5e9;cursor:pointer;display:grid;place-items:center}
+.roll-ui button::before{content:"";width:9px;height:9px;border-left:2px solid var(--wine);border-bottom:2px solid var(--wine);transform:translateX(2px) rotate(45deg)}
+.roll-ui button.next::before{transform:translateX(-2px) rotate(-135deg)}
+.roll-ui{gap:5rem}
+
+/* ========== SURAT ========== */
+#letter{padding:6rem 0 7rem}
+.letter-wrap{position:relative;width:min(88vw,620px);z-index:2;filter:drop-shadow(0 13px 16px rgba(85,50,40,.26))}
+.letter{background:#fbf5e9 var(--grain);padding:clamp(3.4rem,10vw,5rem) clamp(1.6rem,7vw,3.8rem) clamp(4rem,10vw,5.5rem);font-family:"Gaegu",cursive;font-size:clamp(1.28rem,4.2vw,1.6rem);line-height:1.5;color:#3f2a2a}
+.letter h2{font:400 clamp(2.6rem,9vw,3.8rem)/1 "Pinyon Script",cursive;color:var(--wine);margin-bottom:1.1rem;text-align:center}
+.letter p+p{margin-top:1rem}
+.letter .sign{text-align:right;margin-top:1.8rem;font:400 clamp(1.7rem,6vw,2.5rem) "Pinyon Script",cursive;color:var(--rose)}
+.clip{position:absolute;z-index:3;left:-3%;top:-34px;width:clamp(78px,17vw,118px);transform:rotate(-30deg);filter:drop-shadow(0 5px 4px rgba(60,35,20,.35))}
+
+/* ========== VIDEO ========== */
+#movie{flex-direction:row;gap:clamp(1.5rem,5vw,4rem);padding-left:5vw;padding-right:5vw;background:var(--blush) var(--grain);background-blend-mode:multiply}
+#movie h2{position:relative;z-index:2;flex:1;min-width:0;font-size:clamp(2.6rem,6vw,5.5rem);line-height:1.2;margin:0;padding:0 .1em}
+#movie h2.tl{text-align:right}
+#movie h2.tr{text-align:left}
+.tv{position:relative;z-index:2;flex:none;width:min(60vw,calc(70vh * 9 / 16 + 36px));width:min(60vw,calc(70svh * 9 / 16 + 36px));padding:clamp(10px,2.4vw,18px);background:#fbf5e9 var(--grain);border-radius:24px;box-shadow:0 18px 28px rgba(85,35,45,.3);outline:2px dashed rgba(169,61,88,.55);outline-offset:-7px}
+@media (max-aspect-ratio:1/1){
+  #movie{flex-direction:column;gap:.4rem;padding-left:0;padding-right:0}
+  #movie h2{flex:none;text-align:center!important;font-size:clamp(2.8rem,11vw,4rem)}
+  .tv{width:min(74vw,calc(56svh * 9 / 16 + 36px))}
+}
+.screen{position:relative;aspect-ratio:9/16;background:#2b1a1e;border-radius:20px;overflow:hidden}
+.screen video{width:100%;height:100%;object-fit:cover}
+#empty{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:1.5rem;color:#f5dcd7;font-size:1.1rem;font-style:italic}
+#playBig{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px;border:0;border-radius:50%;background:rgba(251,240,228,.88);cursor:pointer;display:grid;place-items:center;transition:opacity .25s,transform .25s}
+#playBig::before{content:"";margin-left:5px;border-left:21px solid var(--wine);border-top:13px solid transparent;border-bottom:13px solid transparent}
+.playing #playBig{opacity:0;transform:scale(1.3)}
+.bar{display:flex;align-items:center;gap:.8rem;padding:.8rem .6rem .35rem;color:var(--wine)}
+.bar button{background:none;border:0;cursor:pointer;color:inherit;font:600 1rem "Cormorant Garamond",serif;min-width:44px;min-height:32px}
+.bar input{flex:1;min-width:0;height:4px;appearance:none;-webkit-appearance:none;background:linear-gradient(to right,var(--rose) var(--p,0%),#e4c9c4 var(--p,0%));border-radius:4px;outline-offset:6px}
+.bar input::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--wine);cursor:pointer}
+.bar input::-moz-range-thumb{width:15px;height:15px;border:0;border-radius:50%;background:var(--wine)}
+footer{position:relative;text-align:center;padding:3.4rem 1rem 6rem;overflow:hidden}
+footer p{font-size:clamp(2.2rem,8vw,3.4rem)}
+
+/* ========== 22 VIDEO POTRET ========== */
+html{scroll-snap-type:y proximity}
+#wishes{flex-direction:column;text-align:center;padding-left:1.5rem;padding-right:1.5rem}
+#wishes h2{position:relative;z-index:2;font-size:clamp(3.4rem,14vw,7rem);line-height:1}
+#wishes p{position:relative;z-index:2;font-size:clamp(1.15rem,3.6vw,1.6rem);margin-top:1.2rem}
+.clip-slide{flex-direction:column;scroll-snap-align:center;padding:3.2rem 0 5rem}
+.clip-slide:nth-of-type(even){background:var(--blush) var(--grain);background-blend-mode:multiply}
+.grid{--h:min(38vh,calc(43vw * 16 / 9));--h:min(38svh,calc(43vw * 16 / 9));position:relative;z-index:2;display:grid;grid-template-columns:repeat(2,calc(var(--h) * 9 / 16));gap:clamp(10px,2.4vw,20px)}
+@media (min-aspect-ratio:1/1){.grid{--h:min(66vh,calc(21vw * 16 / 9));--h:min(66svh,calc(21vw * 16 / 9));grid-template-columns:repeat(4,calc(var(--h) * 9 / 16))}.pmid{display:none}}
+.vclip{position:relative;height:var(--h)}
+.phone{position:absolute;inset:0;padding:5px;border-radius:20px;background:linear-gradient(145deg,#8c2b45,#6e2233 55%,#a93d58);box-shadow:0 11px 18px rgba(85,35,45,.34),inset 0 0 0 1.5px #d7b57d}
+.pscreen{position:relative;width:100%;height:100%;overflow:hidden;border-radius:15px;background:#2b1a1e}
+.pscreen video{width:100%;height:100%;object-fit:cover;cursor:pointer}
+.notch{position:absolute;z-index:2;top:5px;left:50%;width:32%;height:9px;margin-left:-16%;background:#6e2233;border-radius:0 0 7px 7px}
+.pplay{position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px;border:0;border-radius:50%;background:rgba(251,240,228,.9);cursor:pointer;display:grid;place-items:center;transition:opacity .25s}
+.pplay::before{content:"";margin-left:4px;border-left:14px solid var(--wine);border-top:9px solid transparent;border-bottom:9px solid transparent}
+.playing .pplay{opacity:0;pointer-events:none}
+.pbar{position:absolute;left:0;right:0;bottom:0;padding:1rem .6rem .6rem;background:linear-gradient(transparent,rgba(43,20,28,.62))}
+.pbar input{display:block;width:100%;height:3px;appearance:none;-webkit-appearance:none;background:linear-gradient(to right,#fbe9e0 var(--p,0%),rgba(255,255,255,.4) var(--p,0%));border-radius:4px}
+.pbar input::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:#fbe9e0;cursor:pointer}
+.pbar input::-moz-range-thumb{width:12px;height:12px;border:0;border-radius:50%;background:#fbe9e0}
+.perr{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:.7rem;color:#f5dcd7;font-size:.9rem;font-style:italic;word-break:break-word}
+.missing .perr{display:flex}.missing .pplay,.missing .pbar{display:none}
+.pd{position:absolute;z-index:3;pointer-events:none;aspect-ratio:1;filter:drop-shadow(0 4px 4px rgba(70,35,30,.3))}
+.pmid{left:50%;top:50%;width:42px;margin:-21px}
+.ftrim{position:absolute;bottom:-3%;width:clamp(120px,24vw,250px)}
+
+/* ========== FRAME SPESIAL + CATATAN ========== */
+/* video landscape tampil utuh di frame potret, tanpa terpotong */
+.pscreen video.fit{object-fit:contain}
+
+/* ========== PEMUTAR LAGU ========== */
+#music{position:fixed;z-index:30;left:max(14px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));display:flex;align-items:center;gap:.65rem;max-width:min(76vw,290px);padding:6px 8px 6px 6px;background:#fbf5e9 var(--grain);border-radius:40px;box-shadow:0 8px 18px rgba(85,35,45,.3);outline:1.5px dashed rgba(169,61,88,.55);outline-offset:-4px;opacity:0;transform:translateY(24px);pointer-events:none;transition:opacity 1s ease,transform 1s ease}
+.opened #music{opacity:1;transform:none;pointer-events:auto}
+.ring{flex:none;width:52px;height:52px;padding:3px;border-radius:50%;background:conic-gradient(var(--rose) var(--p,0%),#e8d2cb var(--p,0%))}
+.disc{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle,#f4dfc7 0 15%,#6e2233 16% 19%,transparent 20%),repeating-radial-gradient(circle,#4a1824 0 2px,#3a121c 2px 4px);display:grid;place-items:center;animation:spin 5s linear infinite;animation-play-state:paused}
+.disc::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--rose)}
+#music.on .disc{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.song-text{min-width:0;line-height:1.05}
+#songTitle{display:block;font:400 1.45rem "Pinyon Script",cursive;color:var(--wine);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#songArtist{display:block;font-size:.88rem;font-style:italic;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+#songBtn{flex:none;width:42px;height:42px;border:0;border-radius:50%;background:var(--wine);cursor:pointer;display:grid;place-items:center;transition:transform .2s}
+#songBtn:active{transform:scale(.92)}
+#songBtn:disabled{opacity:.4;cursor:default}
+#songBtn::before{content:"";margin-left:3px;border-left:13px solid #fbf0e4;border-top:8px solid transparent;border-bottom:8px solid transparent}
+#music.on #songBtn::before{margin:0;width:12px;height:14px;border:0;border-left:4px solid #fbf0e4;border-right:4px solid #fbf0e4}
+
+/* kelopak jatuh */
+#petals{position:fixed;inset:0;z-index:20;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 2s 1s}
+.opened #petals{opacity:1}
+.petal{position:absolute;top:-30px;border-radius:85% 8% 85% 12%;background:linear-gradient(135deg,#fde3dc,#ee8fa4);opacity:.72;animation:fall linear infinite}
+@keyframes fall{to{transform:translate3d(var(--x),112vh,0) rotate(600deg)}}
+@media (prefers-reduced-motion:reduce){.petal,.env,.tap,.cue,.disc{animation:none}.rv{transition-duration:.01s}#petals{display:none}}
+</style>
+</head>
+<body class="locked">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="sBow" viewBox="0 0 120 110"><g fill="none" stroke="#a93d58" stroke-width="5" stroke-linecap="round"><path d="M60 40 C38 12 8 14 12 34 C15 50 44 50 60 40ZM60 40 C82 12 112 14 108 34 C105 50 76 50 60 40Z" fill="#c9566f" fill-opacity=".3"/><path d="M58 44 C50 66 38 85 24 104M62 44 C70 66 82 85 96 104"/></g><circle cx="60" cy="41" r="7" fill="#8c2b45"/></symbol>
+<symbol id="sHeart" viewBox="0 0 100 100"><path d="M50 94 C12 66 3 46 7 28 C12 7 39 5 50 26 C61 5 88 7 93 28 C97 46 88 66 50 94Z" fill="#dec29d" stroke="#a88455"/><path d="M50 83 C20 61 13 46 16 31 C20 15 41 14 50 34 C59 14 80 15 84 31 C87 46 80 61 50 83Z" fill="#ad2340"/><path d="M27 30 q6 -8 13 -3" stroke="#fff" stroke-opacity=".7" stroke-width="3" fill="none" stroke-linecap="round"/></symbol>
+<symbol id="sSeal" viewBox="0 0 100 100"><path d="M50 3 C70 0 90 12 94 30 C102 50 92 78 72 87 C55 100 28 96 17 82 C-1 68 -1 36 14 22 C22 9 36 4 50 3Z" fill="url(#sealG)"/><circle cx="50" cy="49" r="29" fill="none" stroke="#5f416e" stroke-opacity=".6" stroke-width="3"/><g fill="none" stroke="#e1cce4" stroke-opacity=".8" stroke-width="2.4"><path d="M50 28 c12 7 12 15 0 21 c-12 -6 -12 -14 0 -21ZM50 49 c14 -5 20 2 17 12 c-9 3 -17 -2 -17 -12ZM50 49 c-14 -5 -20 2 -17 12 c9 3 17 -2 17 -12Z"/></g></symbol>
+<symbol id="sEnv" viewBox="0 0 120 90"><rect x="2" y="4" width="116" height="82" rx="2" fill="#e8d6b4"/><path d="M2 4 L60 50 L118 4" fill="#f4e8d0" stroke="#b49a70"/><circle cx="60" cy="46" r="10" fill="url(#sealG)"/></symbol>
+<radialGradient id="sealG" cx=".38" cy=".32"><stop offset="0" stop-color="#b797bd"/><stop offset=".6" stop-color="#8f6b9b"/><stop offset="1" stop-color="#6d4c7c"/></radialGradient></defs></svg>
+
+<!-- ============ INTRO: AMPLOP ============ -->
+<div id="intro">
+  <canvas id="bloom" aria-hidden="true"></canvas>
+  <button id="envBtn" aria-label="Buka surat">
+    <span class="env">
+      <svg class="back" viewBox="0 0 320 230" aria-hidden="true">
+        <defs>
+          <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="4"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter>
+          <linearGradient id="pIn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b99d72"/><stop offset="1" stop-color="#d8c198"/></linearGradient>
+          <linearGradient id="pA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ead9b9"/><stop offset=".55" stop-color="#e4cfa9"/><stop offset="1" stop-color="#dcc398"/></linearGradient>
+          <linearGradient id="pB" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecdcbf"/><stop offset="1" stop-color="#d9c094"/></linearGradient>
+        </defs>
+        <rect x="2" y="2" width="316" height="226" rx="4" fill="url(#pIn)" filter="url(#rough)"/>
+      </svg>
+      <svg class="front" viewBox="0 0 320 230" aria-hidden="true">
+        <g filter="url(#rough)">
+          <path d="M2 4 L160 122 L2 228Z" fill="url(#pA)"/>
+          <path d="M318 4 L160 122 L318 228Z" fill="url(#pB)"/>
+          <path d="M2 228 L160 106 L318 228Z" fill="url(#pA)"/>
+        </g>
+        <path d="M6 224 L160 110 L314 224" fill="none" stroke="#a98a5e" stroke-opacity=".4"/>
+        <g fill="#b38f61" opacity=".13"><circle cx="58" cy="190" r="26"/><circle cx="270" cy="170" r="34"/><circle cx="190" cy="205" r="20"/></g>
+      </svg>
+      <svg class="flap" viewBox="0 0 320 230" aria-hidden="true">
+        <g filter="url(#rough)">
+          <path d="M1 2 H319 L172 130 Q160 139 148 130Z" fill="url(#pB)"/>
+          <path d="M72 2 H248 L164 96 Q160 100 156 96Z" fill="#f8f0e0"/>
+        </g>
+        <path d="M1 2 H319 L172 130 Q160 139 148 130Z" fill="none" stroke="#a98a5e" stroke-opacity=".45"/>
+        <!-- lukisan botani -->
+        <g fill="none" stroke-linecap="round">
+          <path d="M160 92 C154 62 142 42 122 18M160 92 C160 60 162 36 166 10M160 92 C168 66 182 44 202 22" stroke="#7f9474" stroke-width="1.5"/>
+          <path d="M139 40 C127 44 118 41 111 34 C122 29 133 31 139 40ZM145 52 C133 60 123 58 115 53 C125 45 138 44 145 52ZM176 48 C188 49 197 43 202 35 C191 32 181 37 176 48ZM170 66 C181 71 192 67 199 60 C188 54 176 56 170 66ZM152 74 C142 78 133 76 127 70 C137 65 147 66 152 74Z" fill="#8ea385" stroke="#6f8467" stroke-width=".5"/>
+        </g>
+        <g><path d="M162 15 q-9 3 -7 13 q6 3 8 -1 q5 3 7 -1 q2 -8 -8 -11Z" fill="#df8aa0"/><path d="M169 29 q-8 3 -6 12 q5 3 7 -1 q5 2 6 -2 q1 -7 -7 -9Z" fill="#e8a5b5"/><path d="M153 34 q-8 3 -6 11 q5 3 7 -1 q5 2 6 -2 q1 -6 -7 -8Z" fill="#d97a93"/></g>
+        <g fill="#9877a8"><circle cx="124" cy="23" r="4"/><circle cx="131" cy="29" r="3.2"/><circle cx="118" cy="32" r="3"/><circle cx="197" cy="24" r="3.8"/><circle cx="190" cy="31" r="3"/><circle cx="204" cy="33" r="3"/></g>
+        <g fill="#c3a4cc"><circle cx="127" cy="36" r="2.5"/><circle cx="197" cy="40" r="2.5"/></g>
+        <!-- segel lilin -->
+        <g id="seal">
+          <path d="M160 108 C171 106 181 112 182 121 C186 131 179 142 169 143 C161 148 150 146 145 140 C136 134 136 121 143 115 C147 109 153 108 160 108Z" fill="url(#sealG)" filter="url(#rough)"/>
+          <circle cx="160" cy="126" r="12.5" fill="none" stroke="#5f416e" stroke-opacity=".5" stroke-width="1.4"/>
+          <g fill="none" stroke="#e1cce4" stroke-opacity=".75" stroke-width="1.2"><path d="M160 118 c5 3 5 6 0 8 c-5 -2 -5 -5 0 -8ZM160 126 c6 -2 8 1 7 5 c-4 1 -7 -1 -7 -5ZM160 126 c-6 -2 -8 1 -7 5 c4 1 7 -1 7 -5Z"/></g>
+        </g>
+      </svg>
+    </span>
+    <span class="tap">Tap to open</span>
+  </button>
+</div>
+
+<div id="petals" aria-hidden="true"></div>
+
+<div id="music" role="group" aria-label="Pemutar lagu">
+  <div class="ring" id="songRing"><div class="disc"></div></div>
+  <div class="song-text"><span id="songTitle"></span><span id="songArtist"></span></div>
+  <button id="songBtn" aria-label="Putar lagu"></button>
+  <audio id="song" loop preload="auto"></audio>
+</div>
+
+<main>
+  <!-- ============ HAPPY BIRTHDAY ============ -->
+  <section id="hero">
+    <div class="ribbon top"></div>
+    <canvas class="fl" data-t="lily" data-p="rose" style="width:clamp(170px,38vw,380px);left:-7%;top:6%" data-sp=".12"></canvas>
+    <canvas class="fl" data-t="peony" data-p="blush" style="width:clamp(145px,32vw,320px);right:-6%;top:13%" data-sp=".2"></canvas>
+    <canvas class="fl" data-t="lily" data-p="cream" style="width:clamp(155px,34vw,350px);left:-5%;bottom:3%" data-sp="-.1"></canvas>
+    <canvas class="fl" data-t="lily" data-p="coral" style="width:clamp(165px,37vw,370px);right:-8%;bottom:5%" data-sp="-.18"></canvas>
+    <canvas class="fl" data-t="hyd" data-p="mauve" style="width:clamp(90px,19vw,200px);left:30%;bottom:-2%" data-sp="-.08"></canvas>
+
+    <h1 class="title script rv"><span class="a">Happy</span><span class="b">Birthday</span></h1>
+    <p class="name script rv" id="nameEl" style="--d:.2s"></p>
+    <p class="sub rv" id="subEl" style="--d:.35s"></p>
+    <div class="cue">scroll</div>
+  </section>
+
+  <!-- ============ FOTO TAMPILAN 1 ============ -->
+  <section id="photos1">
+    <canvas class="fl" data-t="lily" data-p="blush" style="width:clamp(130px,26vw,270px);left:-8%;top:40%" data-sp=".1"></canvas>
+    <div class="scene">
+      <div class="oval rv" style="--r:2deg">
+        <div class="ph" data-photo="0"></div>
+        <svg viewBox="0 0 370 470" aria-hidden="true">
+          <defs><linearGradient id="fr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a03b55"/><stop offset=".5" stop-color="#6e2233"/><stop offset="1" stop-color="#94324c"/></linearGradient></defs>
+          <ellipse cx="185" cy="235" rx="165" ry="215" fill="none" stroke="url(#fr)" stroke-width="30"/>
+          <ellipse cx="185" cy="235" rx="165" ry="215" fill="none" stroke="#c97b8c" stroke-width="5" stroke-dasharray="1 15" stroke-linecap="round"/>
+          <ellipse cx="185" cy="235" rx="147" ry="197" fill="none" stroke="#f0d3b8" stroke-width="2"/>
+          <g fill="#7f2a3e" stroke="#c97b8c" stroke-width="2"><path d="M185 2 c20 -3 38 12 22 24 c-8 6 -14 -2 -22 7 c-8 -9 -14 -1 -22 -7 c-16 -12 2 -27 22 -24Z"/><path d="M185 468 c20 3 38 -12 22 -24 c-8 -6 -14 2 -22 -7 c-8 9 -14 1 -22 7 c-16 12 2 27 22 24Z"/><path d="M2 235 c-3 -20 12 -38 24 -22 c6 8 -2 14 7 22 c-9 8 -1 14 -7 22 c-12 16 -27 -2 -24 -22Z"/><path d="M368 235 c3 -20 -12 -38 -24 -22 c-6 8 2 14 -7 22 c9 8 1 14 7 22 c12 16 27 -2 24 -22Z"/></g>
+        </svg>
+      </div>
+      <div class="snap rv" style="--r:-7deg;--d:.2s"><div class="ph" data-photo="1"></div></div>
+      <svg class="deco rv" style="left:3%;top:9%;width:24%;--r:-11deg;--d:.3s" viewBox="0 0 160 140" aria-hidden="true"><defs><linearGradient id="cam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3e7dd"/><stop offset="1" stop-color="#c8ad9c"/></linearGradient><radialGradient id="lens" cx=".35" cy=".3"><stop offset="0" stop-color="#b98897"/><stop offset=".55" stop-color="#58303f"/><stop offset="1" stop-color="#2d1820"/></radialGradient></defs><rect x="28" y="28" width="124" height="82" rx="10" fill="url(#cam)" stroke="#a98e80"/><rect x="42" y="18" width="34" height="13" rx="3" fill="#d5c0b1" stroke="#a98e80"/><circle cx="96" cy="70" r="31" fill="#dac6b8" stroke="#a98e80"/><circle cx="96" cy="70" r="22" fill="url(#lens)"/><circle cx="89" cy="62" r="5" fill="#fff" opacity=".6"/><circle cx="136" cy="42" r="5" fill="#c9566f"/><g fill="#f9f1e6" stroke="#bfa18d" stroke-width=".8"><circle cx="24" cy="48" r="4.5"/><circle cx="17" cy="59" r="4.5"/><circle cx="12" cy="72" r="4.5"/><circle cx="11" cy="86" r="4.5"/><circle cx="15" cy="100" r="4.5"/><circle cx="23" cy="112" r="4.5"/><circle cx="34" cy="122" r="4.5"/></g></svg>
+      <canvas class="fl rv" data-t="lily" data-p="cream" style="right:-1%;top:2%;width:37%;--d:.15s"></canvas>
+      <svg class="deco rv" style="right:3%;top:57%;width:27%;--r:-3deg;--d:.35s" viewBox="0 0 180 96" aria-hidden="true"><path d="M2 48 c-1 -8 8 -8 12 -3" fill="none" stroke="#b99155" stroke-width="3"/><rect x="16" y="12" width="160" height="72" rx="7" fill="#7f3044" stroke="#d7b57d" stroke-width="4"/><rect x="24" y="20" width="144" height="56" rx="4" fill="none" stroke="#d7b57d"/><text x="96" y="60" text-anchor="middle" font-family="Pinyon Script,cursive" font-size="35" fill="#f9e6d3">with love</text></svg>
+      <svg class="deco rv" style="right:24%;bottom:6%;width:15%;--r:9deg;--d:.45s" viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="enam" cx=".38" cy=".3"><stop offset="0" stop-color="#ec7f8e"/><stop offset=".6" stop-color="#ad2340"/><stop offset="1" stop-color="#6e1228"/></radialGradient></defs><path d="M50 94 C12 66 3 46 7 28 C12 7 39 5 50 26 C61 5 88 7 93 28 C97 46 88 66 50 94Z" fill="#dec29d" stroke="#a88455"/><path d="M50 83 C20 61 13 46 16 31 C20 15 41 14 50 34 C59 14 80 15 84 31 C87 46 80 61 50 83Z" fill="url(#enam)"/><path d="M27 30 q6 -8 13 -3" stroke="#fff" stroke-opacity=".7" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+      <svg class="deco rv" style="left:43%;bottom:7%;width:17%;--r:-8deg;--d:.5s" viewBox="0 0 120 110" aria-hidden="true"><g fill="none" stroke="#a93d58" stroke-width="5" stroke-linecap="round"><path d="M60 40 C38 12 8 14 12 34 C15 50 44 50 60 40ZM60 40 C82 12 112 14 108 34 C105 50 76 50 60 40Z"/><path d="M58 44 C50 66 38 85 24 104M62 44 C70 66 82 85 96 104"/></g><circle cx="60" cy="41" r="7" fill="#8c2b45"/></svg>
+    </div>
+  </section>
+
+  <!-- ============ FOTO TAMPILAN 2 ============ -->
+  <section id="photos2">
+    <div class="ribbon top"></div>
+    <canvas class="fl" data-t="peony" data-p="magenta" style="width:clamp(130px,27vw,280px);right:-7%;top:6%" data-sp=".1"></canvas>
+    <div class="scene">
+      <div class="note rv" style="--r:3deg;--d:.1s"><h3>Always</h3><p>stay in the little moments,<br>the ones you'd keep forever.</p></div>
+      <div class="polaroid rv" style="--r:-8deg"><div class="ph" data-photo="2"></div><p>my favorite</p></div>
+      <svg class="locket rv" style="--r:4deg;--d:.25s" viewBox="0 0 200 200" aria-label="Foto" role="img">
+        <defs><clipPath id="hc"><path d="M100 178 C32 128 16 92 22 62 C30 28 78 24 100 60 C122 24 170 28 178 62 C184 92 168 128 100 178Z"/></clipPath><linearGradient id="sv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#cdb7b1"/><stop offset=".65" stop-color="#f7ece7"/><stop offset="1" stop-color="#a88f8b"/></linearGradient><linearGradient id="phg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7d5d3"/><stop offset="1" stop-color="#e7cfdc"/></linearGradient></defs>
+        <path d="M100 42 C92 24 92 12 100 2 C108 12 108 24 100 42" fill="none" stroke="#a88f8b" stroke-width="3" stroke-dasharray="4 3"/>
+        <path d="M100 178 C32 128 16 92 22 62 C30 28 78 24 100 60 C122 24 170 28 178 62 C184 92 168 128 100 178Z" fill="url(#phg)"/>
+        <text x="100" y="108" text-anchor="middle" font-family="Cormorant Garamond,serif" font-style="italic" font-size="15" fill="#9e6474" id="lockHint">Foto 4</text>
+        <image id="lockImg" x="10" y="20" width="180" height="165" preserveAspectRatio="xMidYMid slice" clip-path="url(#hc)"/>
+        <path d="M100 186 C24 132 6 92 14 58 C24 18 78 14 100 50 C122 14 176 18 186 58 C194 92 176 132 100 186Z" fill="none" stroke="url(#sv)" stroke-width="10"/>
+        <path d="M100 178 C32 128 16 92 22 62 C30 28 78 24 100 60 C122 24 170 28 178 62 C184 92 168 128 100 178Z" fill="none" stroke="#9e8580" stroke-width="1.4"/>
+      </svg>
+      <svg class="deco rv" style="z-index:4;left:44%;top:71%;width:13%;--d:.4s" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 3 C70 0 90 12 94 30 C102 50 92 78 72 87 C55 100 28 96 17 82 C-1 68 -1 36 14 22 C22 9 36 4 50 3Z" fill="url(#sealG)"/><circle cx="50" cy="49" r="29" fill="none" stroke="#5f416e" stroke-opacity=".6" stroke-width="3"/><g fill="none" stroke="#e1cce4" stroke-opacity=".8" stroke-width="2.4"><path d="M50 28 c12 7 12 15 0 21 c-12 -6 -12 -14 0 -21ZM50 49 c14 -5 20 2 17 12 c-9 3 -17 -2 -17 -12ZM50 49 c-14 -5 -20 2 -17 12 c9 3 17 -2 17 -12Z"/></g></svg>
+      <canvas class="fl rv" data-t="lily" data-p="rose" style="z-index:2;left:-6%;bottom:-8%;width:31%;--d:.3s"></canvas>
+      <svg class="deco rv" style="right:13%;bottom:1%;width:18%;--r:-6deg;--d:.5s" viewBox="0 0 120 110" aria-hidden="true"><g fill="none" stroke="#8c2b45" stroke-width="4" stroke-linecap="round"><path d="M60 40 C38 12 8 14 12 34 C15 50 44 50 60 40ZM60 40 C82 12 112 14 108 34 C105 50 76 50 60 40Z"/><path d="M58 44 C50 66 38 85 24 104M62 44 C70 66 82 85 96 104"/></g><circle cx="60" cy="41" r="6" fill="#6e2233"/></svg>
+      <svg class="deco rv" style="z-index:2;left:1%;top:3%;width:19%;--r:-12deg;--d:.35s" viewBox="0 0 120 90" aria-hidden="true"><rect x="2" y="4" width="116" height="82" rx="2" fill="#e8d6b4"/><path d="M2 4 L60 50 L118 4" fill="#f4e8d0" stroke="#b49a70"/><path d="M0 44 H120M60 0 V90" stroke="#c9566f" stroke-width="4" opacity=".75"/><circle cx="60" cy="46" r="10" fill="url(#sealG)"/></svg>
+    </div>
+    <div class="ribbon bottom"></div>
+  </section>
+
+  <!-- ============ SURAT ============ -->
+  <!-- ============ CAMERA ROLL: 49 foto, geser kanan kiri ============ -->
+  <section id="roll">
+    <canvas class="fl" data-t="lily" data-p="rose" style="width:clamp(130px,26vw,280px);left:-7%;top:3%" data-sp=".1"></canvas>
+    <canvas class="fl" data-t="peony" data-p="cream" style="width:clamp(120px,22vw,250px);right:-6%;bottom:2%" data-sp="-.1"></canvas>
+    <h2 class="script rv">my beautiful gallery</h2>
+    <div class="film rv" style="--d:.25s"><div class="track" id="track"></div></div>
+    <div class="roll-ui">
+      <button class="prev" id="rollPrev" aria-label="Foto sebelumnya"></button>
+      <button class="next" id="rollNext" aria-label="Foto berikutnya"></button>
+    </div>
+  </section>
+
+  <section id="letter">
+    <canvas class="fl" data-t="lily" data-p="blush" style="width:clamp(150px,30vw,330px);left:-9%;top:7%" data-sp=".12"></canvas>
+    <canvas class="fl" data-t="peony" data-p="rose" style="width:clamp(120px,24vw,260px);right:-6%;top:42%" data-sp="-.1"></canvas>
+    <div class="letter-wrap rv">
+      <svg class="clip" viewBox="0 0 120 90" aria-hidden="true"><defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2d59b"/><stop offset=".5" stop-color="#a97d3e"/><stop offset="1" stop-color="#e4bf7c"/></linearGradient></defs><circle cx="60" cy="20" r="15" fill="none" stroke="url(#gd)" stroke-width="7"/><path d="M30 34 H90 L104 76 Q106 84 96 84 H24 Q14 84 16 76Z" fill="url(#gd)"/><path d="M24 78 H96" stroke="#fff4d8" stroke-opacity=".7" stroke-width="3"/></svg>
+      <div class="letter" id="paper"><h2>For You</h2><div id="letterBody"></div><p class="sign" id="signEl"></p></div>
+      <canvas class="fl" data-t="lily" data-p="cream" style="width:clamp(110px,24vw,170px);right:-7%;bottom:-7%"></canvas>
+    </div>
+  </section>
+
+  <!-- ============ VIDEO ============ -->
+  <section id="movie">
+    <div class="ribbon top"></div>
+    <canvas class="fl" data-t="lily" data-p="coral" style="width:clamp(130px,26vw,290px);left:-7%;bottom:2%" data-sp="-.1"></canvas>
+    <canvas class="fl" data-t="lily" data-p="blush" style="width:clamp(120px,23vw,260px);right:-6%;top:7%" data-sp=".1"></canvas>
+    <h2 class="script rv tl">Our</h2>
+    <div class="tv rv" id="tv" style="--d:.15s">
+      <div class="screen">
+        <video id="vid" playsinline preload="metadata"></video>
+        <div id="empty">Video belum ada. Isi CONFIG.video di bagian script.</div>
+        <button id="playBig" aria-label="Putar video"></button>
+      </div>
+      <div class="bar">
+        <button id="playSm">Play</button>
+        <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Posisi video">
+        <button id="muteBtn">Sound</button>
+      </div>
+    </div>
+    <h2 class="script rv tr" style="--d:.3s">Memories</h2>
+  </section>
+
+  <!-- ============ 28 VIDEO POTRET: dibuat otomatis dari CONFIG.clips ============ -->
+  <section id="wishes">
+    <div class="ribbon top"></div>
+    <canvas class="fl" data-t="lily" data-p="rose" style="width:clamp(140px,28vw,300px);left:-7%;top:8%" data-sp=".1"></canvas>
+    <canvas class="fl" data-t="peony" data-p="cream" style="width:clamp(130px,26vw,280px);right:-6%;bottom:8%" data-sp="-.1"></canvas>
+    <h2 class="script rv" id="wishesTitle"></h2>
+    <p class="rv" id="wishesSub" style="--d:.2s"></p>
+    <div class="cue">scroll</div>
+  </section>
+  <div id="clips" style="display:contents"></div>
+
+  <footer>
+    <canvas class="fl" data-t="hyd" data-p="mauve" style="width:130px;left:-20px;bottom:-14px"></canvas>
+    <canvas class="fl" data-t="lily" data-p="rose" style="width:170px;right:-30px;bottom:-30px"></canvas>
+    <p class="script rv" id="endEl"></p>
+    <div class="ribbon bottom"></div>
+  </footer>
+</main>
+
+<script>
+/* =====================================================
+   UBAH ISI WEB DI SINI
+   Taruh file foto/video satu folder dengan index.html
+===================================================== */
+const CONFIG = {
+  name: "Laura Diva Allegra",
+  from: "Farhan Dzaky",
+  wish: "Wishing u endless happiness, success, n beautiful moments ahead",
+  photos: ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"],
+  video: "video.mp4",
+  // CAMERA ROLL: foto di folder "roll" bernama 1.jpg sampai 49.jpg
+  rollCount: 49,
+  // nomor foto yang Live Photo. Videonya roll/<nomor>.mp4, contoh roll/5.mp4
+  rollLive: [],
+  // 28 video. Satu baris adalah satu slide berisi 4 frame.
+  clips: [
+    "videos/orang1.mp4",  "videos/orang2.mp4",  "videos/orang3.mp4",  "videos/orang4.mp4",
+    "videos/orang5.mp4",  "videos/orang6.mp4",  "videos/orang7.mp4",  "videos/orang8.mp4",
+    "videos/orang9.mp4",  "videos/orang10.mp4", "videos/orang11.mp4", "videos/orang12.mp4",
+    "videos/orang13.mp4", "videos/orang14.mp4", "videos/orang15.mp4", "videos/orang16.mp4",
+    "videos/orang17.mp4", "videos/orang18.mp4", "videos/orang19.mp4", "videos/orang20.mp4",
+    "videos/orang21.mp4", "videos/orang22.mp4", "videos/orang23.mp4",
+    "videos/orang24.mp4", "videos/orang25.mp4", "videos/orang26.mp4",
+    "videos/orang27.mp4", "videos/orang28.mp4"
+  ],
+
+  wishesTitle: "little wishes",
+  wishesSub: "from the people who love u",
+  songVolumeWhileVideo: 0.22,   // volume lagu saat video diputar: 0 sampai 1
+  song: "lagu.mp3",
+  songTitle: "Futile devices",
+  songArtist: "Sufjan Steven",
+  letter: [
+    "Selamat ulang tahun, my little lilo.",
+    "I don't know what the future holds for us, but I'm truly grateful that life brought u into mine.",
+    "Sometimes, I wonder what I did to deserve someone like u. You mean more to me than words could ever explain. Even when I'm not the best at showing it, I hope u know how special u are to me.",
+    "I'm so so proud of u, of ur efforts, ur growth, and everything u overcome every day. I hope u never forget how much u matter.",
+    "No matter what life brings, i hope we keep choosing each other until the end.",
+    "I will love u, today, tomorrow n forever. all ways. always.",
+  ]
+};
+
+/* ---------- isi konten ---------- */
+const $ = s => document.querySelector(s);
+$("#nameEl").textContent = CONFIG.name;
+$("#subEl").textContent = CONFIG.wish;
+$("#signEl").textContent = "with love, " + CONFIG.from;
+$("#endEl").textContent = "mwaaahhh babaaii ";
+CONFIG.letter.forEach(t => { const p = document.createElement("p"); p.textContent = t; $("#letterBody").append(p); });
+document.querySelectorAll(".ph").forEach(el => {
+  const i = +el.dataset.photo;
+  el.textContent = "Foto " + (i + 1);
+  const img = new Image(); img.alt = "Foto " + (i + 1);
+  img.onload = () => el.append(img);
+  img.src = CONFIG.photos[i];
+});
+{ const im = new Image();
+  im.onload = () => { $("#lockImg").setAttribute("href", CONFIG.photos[3]); $("#lockHint").remove(); };
+  im.src = CONFIG.photos[3]; }
+
+/* ---------- buat slide video ---------- */
+$("#wishesTitle").textContent = CONFIG.wishesTitle;
+$("#wishesSub").textContent = CONFIG.wishesSub;
+const FLOWER_SETS = [["lily","rose","peony","cream"],["peony","magenta","lily","blush"],["lily","coral","hyd","mauve"],["lily","cream","peony","rose"]];
+const DECOS = [
+  [["sBow",{left:"calc(50% - 38px)",top:"-34px",width:"76px"},-4],["sHeart",{right:"-14px",bottom:"-12px",width:"52px"},10]],
+  [["sSeal",{left:"-14px",bottom:"24%",width:"50px"},-8],["sBow",{right:"-16px",top:"-26px",width:"70px"},12]],
+  [["sEnv",{left:"-14px",top:"-20px",width:"66px"},-12],["sSeal",{right:"-12px",bottom:"-10px",width:"48px"},7]],
+  [["sHeart",{right:"-12px",top:"-16px",width:"50px"},-9],["sEnv",{left:"-12px",bottom:"-14px",width:"64px"},9]]
+];
+const svgDeco = ([id, pos, r]) => '<svg class="pd" style="' + Object.entries(pos).map(([a, b]) => a + ":" + b).join(";") + ';transform:rotate(' + r + 'deg)"><use href="#' + id + '"/></svg>';
+const CLIP_HTML = '<div class="phone"><div class="notch"></div><div class="pscreen"><video playsinline webkit-playsinline preload="metadata"></video><div class="perr"></div><button class="pplay" aria-label="Putar video"></button><div class="pbar"><input type="range" min="0" max="1000" value="0" aria-label="Posisi video"></div></div></div>';
+// 5 video landscape ikut digabung ke slide 4 frame, setelah video lainnya
+for (let n = 0; n < CONFIG.clips.length; n += 4) {
+  const i = n / 4, k = i % 4, sec = document.createElement("section"), [t1, p1, t2, p2] = FLOWER_SETS[k];
+  sec.className = "clip-slide";
+  sec.innerHTML = (k % 2 ? '<div class="ribbon top"></div>' : "") +
+    '<canvas class="fl ftrim" data-lazy data-t="' + t1 + '" data-p="' + p1 + '" style="left:-5%"></canvas>' +
+    '<canvas class="fl ftrim" data-lazy data-t="' + t2 + '" data-p="' + p2 + '" style="right:-5%;bottom:auto;top:6%"></canvas>' +
+    '<div class="grid">' + CONFIG.clips.slice(n, n + 4).map((_, c) => '<div class="vclip rv" style="--d:' + c * .1 + 's">' + CLIP_HTML + '</div>').join("") +
+    DECOS[k].map(svgDeco).join("") + '<svg class="pd pmid"><use href="#' + (k % 2 ? "sHeart" : "sSeal") + '"/></svg></div>';
+  sec.querySelectorAll(".vclip").forEach((c, x) => c.dataset.video = CONFIG.clips[n + x]);
+  $("#clips").append(sec);
+}
+
+/* ---------- pabrik bunga: semua dilukis dengan canvas ---------- */
+const R = (a, b) => a + Math.random() * (b - a);
+const pick = a => a[Math.random() * a.length | 0];
+const mk = (w, h) => { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; };
+const PAL = {
+  rose:   {base:"#e9c66d",deep:"#d9486f",mid:"#ec7f98",light:"#f7b9c2",tip:"#fde6e0",spot:"#8c1f3a"},
+  blush:  {base:"#efdc92",deep:"#ee9aa8",mid:"#f7c6c6",light:"#fde3d8",tip:"#fff4e8",spot:"#b24a5e"},
+  cream:  {base:"#e8d57d",deep:"#f0cfa6",mid:"#fbe9cf",light:"#fff5e4",tip:"#fffaf0",spot:"#c99363"},
+  coral:  {base:"#e9b45d",deep:"#bf2f3a",mid:"#e15a55",light:"#f08a7d",tip:"#f9c2ae",spot:"#6f1420"},
+  magenta:{base:"#e7b4c0",deep:"#cc4f8d",mid:"#e583b2",light:"#f3b4cf",tip:"#fbdbe6",spot:"#7f2a5d"},
+  mauve:  {base:"#ddb0bb",deep:"#a9648e",mid:"#d98ea7",light:"#f0b7c2",tip:"#f9d9d9",spot:"#74456b"}
+};
+function blotches(x, w, h, n, col) {
+  for (let i = 0; i < n; i++) {
+    const px = R(0, w), py = R(0, h), r = R(w * .08, w * .34);
+    const g = x.createRadialGradient(px, py, 0, px, py, r);
+    g.addColorStop(0, col); g.addColorStop(1, "rgba(255,255,255,0)");
+    x.fillStyle = g; x.fillRect(px - r, py - r, r * 2, r * 2);
+  }
+}
+function lilyPetal(p) {
+  const W = 180, L = 330, c = mk(W, L), x = c.getContext("2d"), m = W / 2, j = () => R(-5, 5);
+  const path = new Path2D();
+  path.moveTo(m, L - 2);
+  path.bezierCurveTo(m - 20, L * .82, m - W * .47 + j(), L * .56, m - W * .41, L * .33);
+  path.bezierCurveTo(m - W * .33, L * .15 + j(), m - 14, L * .07, m + R(-6, 6), 3);
+  path.bezierCurveTo(m + 14, L * .07, m + W * .33, L * .15 + j(), m + W * .41, L * .33);
+  path.bezierCurveTo(m + W * .47 + j(), L * .56, m + 20, L * .82, m, L - 2);
+  x.save(); x.clip(path);
+  const g = x.createLinearGradient(0, L, 0, 0);
+  g.addColorStop(0, p.base); g.addColorStop(.16, p.deep); g.addColorStop(.48, p.mid); g.addColorStop(.8, p.light); g.addColorStop(1, p.tip);
+  x.fillStyle = g; x.fillRect(0, 0, W, L);
+  blotches(x, W, L, 13, "rgba(255,250,244,.2)");
+  const side = x.createLinearGradient(0, 0, W, 0);
+  side.addColorStop(0, p.deep + "66"); side.addColorStop(.3, p.deep + "00"); side.addColorStop(.7, p.deep + "00"); side.addColorStop(1, p.deep + "66");
+  x.fillStyle = side; x.fillRect(0, 0, W, L);
+  [24, 15, 7].forEach((lw, i) => { x.strokeStyle = p.deep + ["18", "26", "55"][i]; x.lineWidth = lw; x.beginPath(); x.moveTo(m, L); x.quadraticCurveTo(m + R(-5, 5), L * .4, m, L * .08); x.stroke(); });
+  x.lineWidth = 1; x.strokeStyle = p.deep + "55";
+  for (let i = -4; i <= 4; i++) { if (!i) continue; x.beginPath(); x.moveTo(m + i * 2, L); x.quadraticCurveTo(m + i * 17, L * .48, m + i * 7, L * .12); x.stroke(); }
+  x.fillStyle = p.spot;
+  for (let i = 0; i < 34; i++) { x.globalAlpha = R(.45, .95); x.beginPath(); x.arc(m + R(-35, 35), R(L * .42, L * .86), R(1, 3), 0, 7); x.fill(); }
+  x.restore();
+  x.globalAlpha = .4; x.strokeStyle = p.deep; x.lineWidth = 1.4; x.stroke(path);
+  return c;
+}
+function roundPetal(p) {
+  const W = 260, L = 260, c = mk(W, L), x = c.getContext("2d"), m = W / 2;
+  const path = new Path2D();
+  path.moveTo(m, L - 2);
+  path.bezierCurveTo(m - 70, L * .84, m - 128, L * .48, m - 106, L * .18);
+  path.bezierCurveTo(m - 80, -2 + R(0, 12), m - 26, R(0, 8), m + R(-5, 5), L * .08);
+  path.bezierCurveTo(m + 26, R(0, 8), m + 80, -2 + R(0, 12), m + 106, L * .18);
+  path.bezierCurveTo(m + 128, L * .48, m + 70, L * .84, m, L - 2);
+  x.save(); x.clip(path);
+  const g = x.createRadialGradient(m, L, 8, m, L, L * 1.02);
+  g.addColorStop(0, p.deep); g.addColorStop(.42, p.mid); g.addColorStop(.78, p.light); g.addColorStop(1, p.tip);
+  x.fillStyle = g; x.fillRect(0, 0, W, L);
+  blotches(x, W, L, 10, "rgba(255,250,244,.2)");
+  x.lineWidth = 1; x.strokeStyle = p.deep + "38";
+  for (let i = -7; i <= 7; i++) { x.beginPath(); x.moveTo(m, L); x.quadraticCurveTo(m + i * 11, L * .55, m + i * 16, 8); x.stroke(); }
+  x.restore();
+  x.globalAlpha = .28; x.strokeStyle = p.deep; x.lineWidth = 1.5; x.stroke(path);
+  return c;
+}
+function floret(p) {
+  const S = 96, c = mk(S, S), x = c.getContext("2d"); x.translate(S / 2, S / 2);
+  for (let i = 0; i < 4; i++) {
+    x.save(); x.rotate(i * Math.PI / 2 + .4);
+    const g = x.createRadialGradient(0, -20, 2, 0, -20, 26);
+    g.addColorStop(0, p.light); g.addColorStop(.75, p.mid); g.addColorStop(1, p.deep);
+    x.fillStyle = g; x.beginPath(); x.moveTo(0, 0); x.bezierCurveTo(-30, -14, -20, -46, 0, -44); x.bezierCurveTo(20, -46, 30, -14, 0, 0); x.fill(); x.restore();
+  }
+  x.fillStyle = "#e9d88e"; x.beginPath(); x.arc(0, 0, 4.5, 0, 7); x.fill();
+  return c;
+}
+function leafSprite() {
+  const W = 120, L = 300, c = mk(W, L), x = c.getContext("2d"), m = W / 2;
+  const g = x.createLinearGradient(0, L, 0, 0); g.addColorStop(0, "#6f8467"); g.addColorStop(1, "#b7c49d");
+  x.fillStyle = g; x.beginPath(); x.moveTo(m, L); x.bezierCurveTo(-5, L * .6, 12, L * .2, m, 2); x.bezierCurveTo(W - 12, L * .2, W + 5, L * .6, m, L); x.fill();
+  x.strokeStyle = "#e7ebcf88"; x.lineWidth = 2; x.beginPath(); x.moveTo(m, L); x.lineTo(m, 12); x.stroke();
+  return c;
+}
+function stamen() {
+  const S = 300, c = mk(S, S), x = c.getContext("2d"); x.translate(S / 2, S / 2); x.lineCap = "round";
+  for (let i = 0; i < 6; i++) {
+    const a = i * Math.PI / 3 + R(-.18, .18), l = R(92, 122), tx = Math.sin(a) * l, ty = -Math.cos(a) * l;
+    x.strokeStyle = "#cfd38f"; x.lineWidth = 4; x.beginPath(); x.moveTo(0, 0); x.quadraticCurveTo(tx * .4 + 8, ty * .55, tx, ty); x.stroke();
+    x.save(); x.translate(tx, ty); x.rotate(a + 1.4); x.fillStyle = "#a44d27"; x.beginPath(); x.ellipse(0, 0, 18, 6.5, 0, 0, 7); x.fill();
+    x.fillStyle = "#d58a43"; x.beginPath(); x.ellipse(-3, -2, 10, 2.5, 0, 0, 7); x.fill(); x.restore();
+  }
+  x.strokeStyle = "#a9c07f"; x.lineWidth = 6; x.beginPath(); x.moveTo(0, 0); x.quadraticCurveTo(10, -36, -5, -72); x.stroke();
+  x.fillStyle = "#d9e39f"; x.beginPath(); x.arc(-5, -74, 10, 0, 7); x.fill();
+  return c;
+}
+const washImg = (() => { const c = mk(256, 256), x = c.getContext("2d"), g = x.createRadialGradient(128, 128, 15, 128, 128, 128);
+  g.addColorStop(0, "rgba(243,172,178,.7)"); g.addColorStop(.72, "rgba(247,204,200,.4)"); g.addColorStop(1, "rgba(247,214,205,0)"); x.fillStyle = g; x.fillRect(0, 0, 256, 256); return c; })();
+
+const SPR = {lily:{}, peony:{}, hyd:{}, stamens:[stamen(), stamen(), stamen()], leaf:[leafSprite(), leafSprite()]};
+const sprites = (kind, pal, make, n) => SPR[kind][pal] || (SPR[kind][pal] = Array.from({length:n}, () => make(PAL[pal])));
+
+function makeFlower(type, pal, x, y, r, start) {
+  const L = [];
+  if (type === "lily") {
+    const set = sprites("lily", pal, lilyPetal, 3);
+    if (Math.random() < .5) for (let i = 0, n = 2 + (Math.random() * 2 | 0); i < n; i++) L.push({img:pick(SPR.leaf), a:R(0, 6.3), len:1.3, d:0, spin:.3});
+    [0, 2, 4, 1, 3, 5].forEach((k, i) => L.push({img:pick(set), a:k * Math.PI / 3 + R(-.09, .09), len:i < 3 ? 1.04 : .98, d:i * .06, spin:.9}));
+    L.push({img:pick(SPR.stamens), a:R(0, 6.3), len:.68, d:.45, spin:.4, center:true});
+  } else if (type === "peony") {
+    const set = sprites("peony", pal, roundPetal, 3);
+    [[9, .94, 0], [8, .74, .1], [7, .54, .2], [6, .36, .3], [4, .2, .4]].forEach(([n, len, d]) => {
+      const off = R(0, 6.3);
+      for (let i = 0; i < n; i++) L.push({img:pick(set), a:off + i / n * 6.283 + R(-.1, .1), len, d:d + i * .012, spin:.8});
+    });
+  } else {
+    const set = sprites("hyd", pal, floret, 2);
+    for (let i = 0; i < 24; i++) { const a = R(0, 6.3), q = Math.sqrt((i + 1) / 24) * .72; L.push({img:pick(set), a:R(0, 6.3), len:.36, ox:Math.cos(a) * q, oy:Math.sin(a) * q, d:(1 - q) * .3 + R(0, .2), spin:.6, center:true}); }
+  }
+  return {x, y, r, start, rot:R(0, 6.28), layers:L, wash:type !== "hyd" || true};
+}
+const backOut = t => { const c = 1.25; return 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2); };
+function drawFlower(ctx, f, t, wash) {
+  ctx.save(); ctx.translate(f.x, f.y); ctx.rotate(f.rot);
+  if (wash) { const s = f.r * 2.5 * Math.min(1, t * 1.5); ctx.globalAlpha = 1; ctx.drawImage(washImg, -s / 2, -s / 2, s, s); }
+  for (const l of f.layers) {
+    const q = Math.min(1, Math.max(0, (t - l.d) / (1 - l.d))); if (q <= 0) continue;
+    const e = backOut(q), h = l.len * f.r, w = h * l.img.width / l.img.height;
+    ctx.save(); ctx.globalAlpha = Math.min(1, q * 5);
+    if (l.ox !== undefined) ctx.translate(l.ox * f.r * e, l.oy * f.r * e);
+    ctx.rotate(l.a + (1 - e) * l.spin);
+    const ww = w * (.22 + .78 * e), hh = h * e;
+    ctx.drawImage(l.img, -ww / 2, l.center ? -hh / 2 : -hh, ww, hh);
+    ctx.restore();
+  }
+  ctx.restore();
+}
+
+/* ---------- bunga dekorasi statis ---------- */
+function paintFlower(c, S) {
+  c.width = c.height = S;
+  drawFlower(c.getContext("2d"), makeFlower(c.dataset.t, c.dataset.p, S / 2, S / 2, c.dataset.t === "hyd" ? S * .36 : S * .46, 0), 1, false);
+}
+document.querySelectorAll("canvas.fl:not([data-lazy])").forEach(c => paintFlower(c, 460));
+
+/* ---------- animasi buka surat + bunga mekar ---------- */
+const intro = $("#intro"), btn = $("#envBtn"), cv = $("#bloom"), ctx = cv.getContext("2d");
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+scrollTo(0, 0);
+
+function finish() {
+  intro.remove();
+  document.body.classList.remove("locked");
+  document.body.classList.add("opened");
+  layoutTorn();
+}
+function showPage() { document.body.classList.add("opened"); startReveal(); }
+
+btn.addEventListener("click", () => {
+  btn.disabled = true;
+  playSong();
+  if (matchMedia("(prefers-reduced-motion:reduce)").matches) { showPage(); finish(); return; }
+  intro.classList.add("opening");
+  setTimeout(() => intro.classList.add("flap-back"), 680);
+  setTimeout(runBloom, 850);
+}, {once:true});
+
+function runBloom() {
+  const W = innerWidth, H = innerHeight, dpr = Math.min(devicePixelRatio || 1, 1.6);
+  const box = $(".env").getBoundingClientRect(), ox = box.left + box.width / 2, oy = box.top + box.height * .22;
+  cv.width = W * dpr; cv.height = H * dpr; cv.style.transformOrigin = ox + "px " + oy + "px";
+  const bake = mk(cv.width, cv.height), bctx = bake.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const r = Math.sqrt(W * H) * .2, step = r * 1.02, list = [], maxD = Math.hypot(Math.max(ox, W - ox), Math.max(oy, H - oy)) + r;
+  const typeOf = () => { const q = Math.random(); return q < .58 ? "lily" : q < .86 ? "peony" : "hyd"; };
+  const palOf = t => t === "lily" ? pick(["rose", "rose", "blush", "blush", "cream", "coral", "magenta"]) : t === "peony" ? pick(["magenta", "blush", "cream", "rose"]) : "mauve";
+  const SPREAD = 3.5, DUR = 1.55, ph1 = R(0, 6.3), ph2 = R(0, 6.3);
+  [0, 1].forEach(pass => {
+    for (let gy = -r * .5 + (pass ? step / 2 : 0); gy < H + r; gy += step)
+      for (let gx = -r * .5 + (pass ? step / 2 : 0); gx < W + r; gx += step) {
+        const x = gx + R(-r * .25, r * .25), y = gy + R(-r * .25, r * .25), d = Math.hypot(x - ox, y - oy) / maxD;
+        const ang = Math.atan2(y - oy, x - ox), lobe = 1 + .17 * Math.sin(ang * 3 + ph1) + .08 * Math.sin(ang * 7 + ph2);
+        const t = typeOf(), grow = pass ? 1 : .5 + .5 * Math.min(1, d * 2.4);
+        list.push(makeFlower(t, palOf(t), x, y, r * R(.9, 1.28) * (t === "hyd" ? .72 : 1) * grow, d * lobe * SPREAD + R(0, .2) + pass * .42));
+      }
+  });
+  // lily kecil pembuka yang muncul tepat dari mulut amplop
+  list.push(makeFlower("lily", "rose", ox, oy - r * .1, r * .55, 0));
+  list.sort((a, b) => a.start - b.start);
+
+  const END = list[list.length - 1].start + DUR;
+  let done = 0, t0 = performance.now(), holeStart = 0, leaving = false;
+  function frame(now) {
+    const t = (now - t0) / 1000;
+    let scale = 1;
+    if (t > 1.9 && !leaving) { leaving = true; intro.classList.add("leaving"); }
+    while (done < list.length && t >= list[done].start + DUR) drawFlower(bctx, list[done++], 1, true);
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height); ctx.drawImage(bake, 0, 0); ctx.restore();
+    for (let i = done; i < list.length && list[i].start <= t; i++) drawFlower(ctx, list[i], (t - list[i].start) / DUR, true);
+
+    if (t > END + .35) {
+      if (!holeStart) { holeStart = now; intro.classList.add("clear"); btn.style.display = "none"; showPage(); }
+      const k = Math.min(1, (now - holeStart) / 1700), ek = k * k * (3 - 2 * k), RR = Math.max(1, ek * Math.hypot(W, H) * 1.35);
+      const g = ctx.createRadialGradient(ox, oy, RR * .55, ox, oy, RR);
+      g.addColorStop(0, "rgba(0,0,0,1)"); g.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.globalCompositeOperation = "destination-out"; ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); ctx.globalCompositeOperation = "source-over";
+      scale = 1 + ek * .28;
+      if (k >= 1) { finish(); return; }
+    }
+    cv.style.transform = "scale(" + scale + ")";
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ---------- reveal & parallax saat scroll ---------- */
+function startReveal() {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.12});
+  document.querySelectorAll(".rv").forEach(el => io.observe(el));
+}
+const parallax = [...document.querySelectorAll("[data-sp]")];
+let tick = false;
+addEventListener("scroll", () => {
+  if (tick) return; tick = true;
+  requestAnimationFrame(() => {
+    parallax.forEach(el => { const r = el.getBoundingClientRect(); el.style.translate = "0 " + ((r.top + r.height / 2 - innerHeight / 2) * +el.dataset.sp).toFixed(1) + "px"; });
+    tick = false;
+  });
+}, {passive:true});
+
+/* ---------- pinggiran kertas sobek ---------- */
+const paper = $("#paper");
+function layoutTorn() {
+  const w = paper.offsetWidth, h = paper.offsetHeight, pts = [], J = () => Math.random() * 7, S = 13;
+  for (let x = 0; x < w; x += S) pts.push(x + "px " + J() + "px");
+  for (let y = 0; y < h; y += S) pts.push(w - J() + "px " + y + "px");
+  for (let x = w; x > 0; x -= S) pts.push(x + "px " + (h - J()) + "px");
+  for (let y = h; y > 0; y -= S) pts.push(J() + "px " + y + "px");
+  paper.style.clipPath = "polygon(" + pts.join(",") + ")";
+}
+new ResizeObserver(layoutTorn).observe(paper);
+
+/* ---------- pemutar video ---------- */
+const vid = $("#vid"), tv = $("#tv"), seek = $("#seek"), playSm = $("#playSm"), muteBtn = $("#muteBtn");
+vid.src = CONFIG.video;
+vid.addEventListener("error", () => { $("#empty").style.display = "flex"; $("#playBig").style.display = "none"; });
+const toggle = () => vid.paused ? vid.play().catch(() => {}) : vid.pause();
+$("#playBig").onclick = toggle; vid.onclick = toggle; playSm.onclick = toggle;
+vid.onplay = () => { tv.classList.add("playing"); playSm.textContent = "Pause"; };
+vid.onpause = () => { tv.classList.remove("playing"); playSm.textContent = "Play"; };
+vid.ontimeupdate = () => { if (vid.duration) { const v = vid.currentTime / vid.duration * 1000; seek.value = v; seek.style.setProperty("--p", v / 10 + "%"); } };
+seek.oninput = () => { if (vid.duration) vid.currentTime = seek.value / 1000 * vid.duration; seek.style.setProperty("--p", seek.value / 10 + "%"); };
+muteBtn.onclick = () => { vid.muted = !vid.muted; muteBtn.textContent = vid.muted ? "Muted" : "Sound"; };
+
+/* ---------- pemutar lagu ---------- */
+const song = $("#song"), music = $("#music"), songBtn = $("#songBtn"), songRing = $("#songRing");
+let wantSong = false, audioCtx = null, songGain = null, fadeTimer = 0;
+$("#songTitle").textContent = CONFIG.songTitle;
+$("#songArtist").textContent = CONFIG.songArtist;
+song.src = CONFIG.song;
+/* Web Audio dipakai karena iPhone tidak mengizinkan song.volume diubah.
+   Saat dibuka langsung dari file:// browser memblokirnya, jadi pakai song.volume. */
+function setupAudio() {
+  if (audioCtx || location.protocol === "file:") return;
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    songGain = audioCtx.createGain();
+    audioCtx.createMediaElementSource(song).connect(songGain).connect(audioCtx.destination);
+  } catch (e) { audioCtx = null; songGain = null; }
+}
+function playSong() {
+  wantSong = true; setupAudio();
+  if (audioCtx && audioCtx.state !== "running") audioCtx.resume().catch(() => {});
+  song.play().catch(() => {});
+}
+function setSongLevel(v) {
+  if (songGain) { songGain.gain.setTargetAtTime(v, audioCtx.currentTime, .25); return; }
+  clearInterval(fadeTimer);
+  fadeTimer = setInterval(() => {
+    const d = v - song.volume;
+    if (Math.abs(d) < .02) { song.volume = v; clearInterval(fadeTimer); } else song.volume += d * .2;
+  }, 40);
+}
+song.addEventListener("error", () => {
+  $("#songTitle").textContent = "Lagu belum ada";
+  $("#songArtist").textContent = CONFIG.song + " tidak ditemukan";
+  songBtn.disabled = true;
+});
+songBtn.onclick = () => { if (song.paused) playSong(); else { wantSong = false; song.pause(); } };
+song.onplay = () => { music.classList.add("on"); songBtn.setAttribute("aria-label", "Jeda lagu"); };
+song.onpause = () => {
+  music.classList.remove("on"); songBtn.setAttribute("aria-label", "Putar lagu");
+  if (wantSong && allVideos.some(v => !v.paused)) setTimeout(() => song.play().catch(() => {}), 150);
+};
+song.ontimeupdate = () => { if (song.duration) songRing.style.setProperty("--p", song.currentTime / song.duration * 100 + "%"); };
+
+/* ---------- semua video: satu jalan, lagu mengecil, berhenti saat discroll lewat ---------- */
+const allVideos = [vid];
+const restoreSong = () => setTimeout(() => { if (allVideos.every(o => o.paused)) setSongLevel(1); }, 60);
+function hookDuck(v) {
+  v.addEventListener("play", () => {
+    allVideos.forEach(o => { if (o !== v && !o.paused) o.pause(); });
+    setSongLevel(CONFIG.songVolumeWhileVideo);
+  });
+  v.addEventListener("pause", restoreSong);
+  v.addEventListener("ended", restoreSong);
+}
+hookDuck(vid);
+const offscreen = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting && !e.target.paused) e.target.pause(); }), {threshold:.3});
+offscreen.observe(vid);
+
+const near = new IntersectionObserver(es => es.forEach(e => {
+  const clip = e.target, v = clip.querySelector("video");
+  if (e.isIntersecting) {
+    if (!v.getAttribute("src")) { clip.classList.remove("missing"); v.src = clip.dataset.video + "#t=0.1"; }
+  } else if (v.getAttribute("src") && v.paused) {
+    v.removeAttribute("src"); v.load();
+    clip.querySelector(".pscreen").classList.remove("playing"); restoreSong(); // load() membatalkan event pause
+  }
+}), {rootMargin:"70% 0px"});
+const flowerObs = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.querySelectorAll("canvas[data-lazy]").forEach(c => paintFlower(c, 320));
+  flowerObs.unobserve(e.target);
+}), {rootMargin:"120% 0px"});
+document.querySelectorAll(".clip-slide").forEach(sec => flowerObs.observe(sec));
+
+document.querySelectorAll(".vclip").forEach(clip => {
+  const v = clip.querySelector("video"), bar = clip.querySelector(".pbar input"), play = clip.querySelector(".pplay"), box = clip.querySelector(".pscreen");
+  allVideos.push(v); hookDuck(v); offscreen.observe(v); near.observe(clip);
+  v.addEventListener("loadedmetadata", () => v.classList.toggle("fit", v.videoWidth > v.videoHeight));
+  const tog = () => v.paused ? v.play().catch(() => {}) : v.pause();
+  play.onclick = tog; v.onclick = tog;
+  v.addEventListener("play", () => box.classList.add("playing"));
+  v.addEventListener("pause", () => box.classList.remove("playing"));
+  v.addEventListener("ended", () => { box.classList.remove("playing"); v.currentTime = .1; });
+  v.addEventListener("error", () => {
+    if (!v.getAttribute("src")) return;
+    clip.classList.add("missing"); clip.querySelector(".perr").textContent = clip.dataset.video + " belum ada";
+  });
+  v.addEventListener("timeupdate", () => { if (v.duration) { const p = v.currentTime / v.duration * 1000; bar.value = p; bar.style.setProperty("--p", p / 10 + "%"); } });
+  bar.oninput = () => { if (v.duration) v.currentTime = bar.value / 1000 * v.duration; bar.style.setProperty("--p", bar.value / 10 + "%"); };
+});
+
+/* ---------- camera roll ---------- */
+(() => {
+  const track = $("#track"), shots = [], live = new Set(CONFIG.rollLive);
+  for (let n = 1; n <= CONFIG.rollCount; n++) {
+    const d = document.createElement("div");
+    d.className = "shot"; d.dataset.n = n;
+    d.innerHTML = '<span class="ph-num">Foto ' + n + '</span>' + (live.has(n) ? '<span class="live"><i></i>LIVE</span>' : "");
+    track.append(d); shots.push(d);
+  }
+  const loadShot = d => {
+    if (d.dataset.ok) return; d.dataset.ok = 1;
+    const n = +d.dataset.n, img = new Image();
+    img.alt = "Foto " + n; img.decoding = "async";
+    img.onload = () => {
+      d.querySelector(".ph-num").remove(); d.prepend(img);
+      if (img.naturalWidth > img.naturalHeight) d.style.aspectRatio = img.naturalWidth + "/" + img.naturalHeight;
+    };
+    img.src = "roll/" + n + ".jpg";
+    if (live.has(n)) {
+      const v = document.createElement("video");
+      v.muted = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", ""); v.preload = "auto";
+      v.src = "roll/" + n + ".mp4";
+      v.onended = () => d.classList.remove("live-on");
+      v.onerror = () => d.querySelector(".live")?.remove();
+      d.append(v);
+    }
+  };
+  const playLive = d => { const v = d.querySelector("video"); if (!v) return; v.currentTime = 0; d.classList.add("live-on"); v.play().catch(() => d.classList.remove("live-on")); };
+  const stopLive = d => { const v = d.querySelector("video"); if (!v) return; v.pause(); d.classList.remove("live-on"); };
+
+  // muat foto saat mendekat, putar Live Photo sekali saat foto berada di tengah
+  const near = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && loadShot(e.target)), {root:track, rootMargin:"0px 200%"});
+  let current = 0;
+  const mid = new IntersectionObserver(es => es.forEach(e => {
+    const d = e.target;
+    if (e.isIntersecting) {
+      d.classList.add("center"); current = shots.indexOf(d);
+      autoLive(d);
+    } else { d.classList.remove("center"); stopLive(d); }
+  }), {root:track, rootMargin:"0px -45%", threshold:0});
+  shots.forEach(d => { near.observe(d); mid.observe(d); });
+  let rollSeen = false;
+  function autoLive(d) {
+    if (!rollSeen || d.dataset.played || !d.querySelector("video")) return;
+    d.dataset.played = 1; setTimeout(() => d.classList.contains("center") && playLive(d), 350);
+  }
+  new IntersectionObserver(es => { rollSeen = es[0].isIntersecting; if (rollSeen && shots[current]) autoLive(shots[current]); }, {threshold:.5}).observe(track);
+
+  // tekan lama untuk memutar Live Photo, seperti di iPhone
+  let holdT = 0, held = null;
+  track.addEventListener("pointerdown", e => {
+    const d = e.target.closest(".shot"); if (!d || !d.querySelector("video")) return;
+    holdT = setTimeout(() => { held = d; playLive(d); }, 220);
+  });
+  const release = () => { clearTimeout(holdT); if (held) { stopLive(held); held = null; } };
+  ["pointerup", "pointercancel", "pointerleave"].forEach(t => track.addEventListener(t, release));
+  track.addEventListener("contextmenu", e => e.preventDefault());
+
+  const go = k => { const i = Math.max(0, Math.min(shots.length - 1, current + k)); shots[i].scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"}); };
+  $("#rollPrev").onclick = () => go(-1);
+  $("#rollNext").onclick = () => go(1);
+})();
+
+/* ---------- kelopak jatuh ---------- */
+for (let i = 0; i < 14; i++) {
+  const p = document.createElement("i"); p.className = "petal"; const s = R(9, 19);
+  p.style.cssText = `left:${R(0, 100)}%;width:${s}px;height:${s * 1.3}px;--x:${R(-110, 110)}px;animation-duration:${R(10, 21)}s;animation-delay:${R(-20, 0)}s`;
+  $("#petals").append(p);
+}
+</script>
+</body>
+</html>
